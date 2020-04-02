@@ -1,0 +1,76 @@
+[1mdiff --git a/src/main/java/br/edu/sc/senac/demo/demoproject/ClientDTO.java b/src/main/java/br/edu/sc/senac/demo/demoproject/ClientDTO.java[m
+[1mindex 4bbfca6..34d24b8 100644[m
+[1m--- a/src/main/java/br/edu/sc/senac/demo/demoproject/ClientDTO.java[m
+[1m+++ b/src/main/java/br/edu/sc/senac/demo/demoproject/ClientDTO.java[m
+[36m@@ -1,6 +1,9 @@[m
+ package br.edu.sc.senac.demo.demoproject;[m
+ [m
+ public class ClientDTO {[m
+[32m+[m
+[32m+[m	[32mpublic static final ClientDTO NULL_VALUE = new ClientDTO("", "", "");[m
+[32m+[m[41m	[m
+ 	private String nome;[m
+ 	private String  dataNascimento;[m
+ 	private String email;[m
+[1mdiff --git a/src/main/java/br/edu/sc/senac/demo/demoproject/ProductController.java b/src/main/java/br/edu/sc/senac/demo/demoproject/ProductController.java[m
+[1mindex 1f9b747..a364b5c 100644[m
+[1m--- a/src/main/java/br/edu/sc/senac/demo/demoproject/ProductController.java[m
+[1m+++ b/src/main/java/br/edu/sc/senac/demo/demoproject/ProductController.java[m
+[36m@@ -37,7 +37,7 @@[m [mfinal class ProductController {[m
+ 	}[m
+ [m
+ 	List<ProductDTO> getAllProducts() {[m
+[31m-		final List<ProductDTO> products = new ArrayList<>();[m
+[32m+[m		[32mfinal List<ProductDTO> products = new ArrayList<>(); //Aqui nao deveria ser PRODUCTS o nome da referencia?[m
+ 		this.productRepository.findAll().forEach(productEntity -> products.add(ProductController.toDTO(productEntity)));[m
+ 		/*[m
+ 		 * final Iterable<ProductEntity> entities = this.productRepository.findAll();[m
+[1mdiff --git a/src/main/java/br/edu/sc/senac/demo/demoproject/ProductService.java b/src/main/java/br/edu/sc/senac/demo/demoproject/ProductService.java[m
+[1mindex b291c31..dbb3c3c 100644[m
+[1m--- a/src/main/java/br/edu/sc/senac/demo/demoproject/ProductService.java[m
+[1m+++ b/src/main/java/br/edu/sc/senac/demo/demoproject/ProductService.java[m
+[36m@@ -19,14 +19,24 @@[m [mimport org.springframework.web.bind.annotation.RestController;[m
+ public final class ProductService {[m
+ [m
+ 	private static final ProductDTO[] DEFAULT_PRODUCTS = new ProductDTO[] {[m
+[31m-			new ProductDTO(Long.valueOf(0), "Phone XL", "A large phone with one of the best screens", Double.valueOf(799)),[m
+[31m-			new ProductDTO(Long.valueOf(0), "Phone Mini", "A great phone with one of the best cameras", Double.valueOf(699)),[m
+[32m+[m			[32mnew ProductDTO(Long.valueOf(0), "Phone XL", "A large phone with one of the best screens",[m
+[32m+[m					[32mDouble.valueOf(799)),[m
+[32m+[m			[32mnew ProductDTO(Long.valueOf(0), "Phone Mini", "A great phone with one of the best cameras",[m
+[32m+[m					[32mDouble.valueOf(699)),[m
+ 			new ProductDTO(Long.valueOf(0), "Phone Standard", "", Double.valueOf(299)) };[m
+ [m
+[32m+[m	[32m// Instância da classe ProductController para manipular os dados da classe ProductService[m
+ 	private final ProductController productController;[m
+ [m
+[32m+[m	[32m// Construtor da classe ProductService que instancia um objeto da classe ProductController[m
+ 	ProductService(final ProductController productController) {[m
+ 		this.productController = productController;[m
+[32m+[m		[32m/*[m
+[32m+[m		[32m * Comando que passa um array de ProductDTO como parametro do metodo .asList da[m
+[32m+[m		[32m * classe Arrays e, para cada dto de ProductController passa um dto como objeto[m
+[32m+[m		[32m * do tipo ProductDTO como parametro do metodo .insertProduct da classe[m
+[32m+[m		[32m * ProductController[m
+[32m+[m		[32m */[m
+ 		Arrays.asList(ProductService.DEFAULT_PRODUCTS).forEach(dto -> this.productController.insertProduct(dto));[m
+ 	}[m
+ [m
+[36m@@ -48,13 +58,15 @@[m [mpublic final class ProductService {[m
+ 	public ResponseEntity<ProductDTO> removeProduct(@PathVariable final Long id) {[m
+ 		final ProductDTO removedProduct = this.productController.removeProduct(id);[m
+ 		if (removedProduct.equals(ProductDTO.NULL_VALUE)) {[m
+[31m-//			return new ResponseEntity<>(HttpStatus.NOT_FOUND);[m
+[32m+[m			[32mreturn new ResponseEntity<>(HttpStatus.NOT_FOUND);[m
+ 		}[m
+[32m+[m
+ 		return new ResponseEntity<>(removedProduct, HttpStatus.OK);[m
+ 	}[m
+ [m
+ 	@PutMapping("/{id}")[m
+[31m-	public ResponseEntity<ProductDTO> updateProduct(@PathVariable final Long id, @RequestBody final ProductDTO product) {[m
+[32m+[m	[32mpublic ResponseEntity<ProductDTO> updateProduct(@PathVariable final Long id,[m
+[32m+[m			[32m@RequestBody final ProductDTO product) {[m
+ 		final ProductDTO oldProduct = this.productController.updateProduct(id, product);[m
+ 		if (oldProduct.equals(ProductDTO.NULL_VALUE)) {[m
+ 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);[m
