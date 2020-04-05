@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,24 +37,41 @@ public class ClientService {
 		return clientController.getAllClients();
 	}
 
+	// Refatorado 05/04/2020
+	@PostMapping("/addpayload")
+	public Long insertClient(@RequestBody ClientDTO client) {
+		return clientController.insertClient(client);
+	}
+
+	// Refatorado 05/04/2020
 	@GetMapping("{id}/details")
-	public ResponseEntity<ClientDTO> details(@PathVariable String id) {
-
-		if (id.substring(0, id.length()).matches("[0-9]*")) {
-			int newId = Integer.parseInt(id);
-			return new ResponseEntity<ClientDTO>(clientController.getClient(newId), HttpStatus.OK);
+	public ResponseEntity<ClientDTO> clientDetails(@PathVariable String id) {
+		if (ClientDTO.NULL_VALUE.equals(clientController.getClient(id))) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		return new ResponseEntity<ClientDTO>(clientController.getClient(id), HttpStatus.OK);
 	}
 
+	// Refatorado 05/04/2020
 	@DeleteMapping("/{id}")
-	public ResponseEntity<ClientDTO> remove(@PathVariable String id) {
-		if (id.substring(0, id.length()).matches("[0-9]*")) {
-			int newId = Integer.parseInt(id);
-			return new ResponseEntity<ClientDTO>(clientController.removeClient(newId), HttpStatus.OK);
+	public ResponseEntity<ClientDTO> removeClient(@PathVariable String id) {
+		if (ClientDTO.NULL_VALUE.equals(clientController.getClient(id))) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		return new ResponseEntity<ClientDTO>(clientController.removeClient(id), HttpStatus.OK);
 	}
+
+	// Refatorado 05/04/2020
+	@PutMapping("/{id}")
+	public ResponseEntity<ClientDTO> updateClient(@PathVariable String id, @RequestBody ClientDTO updateClient) {
+		ClientDTO verifiedClient = clientController.updateClient(id, updateClient);
+		if (ClientDTO.NULL_VALUE.equals(verifiedClient)) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<ClientDTO>(verifiedClient, HttpStatus.OK);
+	}
+
+}
 
 //	@RequestMapping("/add")
 //	public Long cadastrar(@RequestParam("nome") String nome, @RequestParam("dataNascimento") String dataNascimento,
@@ -62,23 +81,3 @@ public class ClientService {
 //		clients.add(client);
 //		return id;
 //	}
-
-//	@PostMapping("/addpayload")
-//	public Long insertClient(@RequestBody ClientDTO client) {
-//		return clientController.insertClient(client);
-//	}
-//
-//	@PutMapping("/{id}")
-//	public ResponseEntity<ClientDTO> updateClient(@PathVariable String id, @RequestBody ClientDTO updateClient) {
-//		if (id.substring(0, id.length()).matches("[0-9]*")) {
-//			int newId = Integer.parseInt(id);
-//			ClientDTO oldClient = clientController.removeClient(newId);
-//			if (newId > -1 && newId < clients.size()) {
-//				clients.add(newId, updateClient);
-//				return new ResponseEntity<ClientDTO>(oldClient, HttpStatus.OK);
-//			}
-//		}
-//		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//	}
-
-}

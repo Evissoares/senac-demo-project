@@ -20,16 +20,45 @@ public class ClientController {
 		return id;
 	}
 
-	ClientDTO getClient(int id) {
+	private static int validateID(String verifyID) {
+		int validID;
+		if (verifyID.substring(0, verifyID.length()).matches("[0-9]*")) {
+			validID = Integer.parseInt(verifyID);
+			return validID;
+		}
+		return -1;
+	}
+
+	private boolean isPresent(int id) {
 		if (id > -1 && id < clients.size()) {
-			return clients.get(id);
+			return true;
+		}
+		return false;
+	}
+
+	ClientDTO getClient(String id) {
+		int newId = validateID(id);
+		if (isPresent(newId)) {
+			return clients.get(newId);
 		}
 		return ClientDTO.NULL_VALUE;
 	}
 
-	ClientDTO removeClient(int id) {
-		if (id > -1 && id < clients.size()) {
-			return clients.remove(id);
+	ClientDTO removeClient(String id) {
+		int newId = validateID(id);
+		if (isPresent(newId)) {
+			ClientDTO oldClient = clients.remove(newId);
+			return oldClient;
+		}
+		return ClientDTO.NULL_VALUE;
+	}
+
+	ClientDTO updateClient(String id, ClientDTO newClient) {
+		int newId = validateID(id);
+		if (isPresent(newId)) {
+			ClientDTO oldClient = clients.remove(newId);
+			clients.add(newId, newClient);
+			return oldClient;
 		}
 		return ClientDTO.NULL_VALUE;
 	}

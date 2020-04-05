@@ -7,7 +7,6 @@ public class ClientDTO {
 	private String  dataNascimento;
 	private String email;
 
-	
 	public ClientDTO(String nome, String dataNascimento, String email) {
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
