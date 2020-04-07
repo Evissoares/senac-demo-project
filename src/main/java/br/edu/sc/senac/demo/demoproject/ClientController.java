@@ -21,19 +21,15 @@ public class ClientController {
 	}
 
 	private static int validateID(String verifyID) {
-		int validID;
 		if (verifyID.substring(0, verifyID.length()).matches("[0-9]*")) {
-			validID = Integer.parseInt(verifyID);
+			int validID = Integer.parseInt(verifyID);
 			return validID;
 		}
 		return -1;
 	}
 
 	private boolean isPresent(int id) {
-		if (id > -1 && id < clients.size()) {
-			return true;
-		}
-		return false;
+		return id > -1 && id < clients.size();
 	}
 
 	ClientDTO getClient(String id) {

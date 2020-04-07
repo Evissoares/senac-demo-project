@@ -46,19 +46,21 @@ public class ClientService {
 	// Refatorado 05/04/2020
 	@GetMapping("{id}/details")
 	public ResponseEntity<ClientDTO> clientDetails(@PathVariable String id) {
-		if (ClientDTO.NULL_VALUE.equals(clientController.getClient(id))) {
+		ClientDTO verifiedClient = clientController.getClient(id);
+		if (ClientDTO.NULL_VALUE.equals(verifiedClient)) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<ClientDTO>(clientController.getClient(id), HttpStatus.OK);
+		return new ResponseEntity<ClientDTO>(verifiedClient, HttpStatus.OK);
 	}
 
 	// Refatorado 05/04/2020
 	@DeleteMapping("/{id}")
 	public ResponseEntity<ClientDTO> removeClient(@PathVariable String id) {
-		if (ClientDTO.NULL_VALUE.equals(clientController.getClient(id))) {
+		ClientDTO verifiedClient = clientController.removeClient(id);
+		if (ClientDTO.NULL_VALUE.equals(verifiedClient)) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<ClientDTO>(clientController.removeClient(id), HttpStatus.OK);
+		return new ResponseEntity<ClientDTO>(verifiedClient, HttpStatus.OK);
 	}
 
 	// Refatorado 05/04/2020
