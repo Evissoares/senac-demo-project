@@ -1,0 +1,23 @@
+[33mcommit f8caf8c6d29b44b729280683d3aa14a73481a282[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: evis <everton.soares@live.com>
+Date:   Tue Apr 7 06:53:20 2020 -0300
+
+    Atribuido os retornos dos metodos da classe ClIentController para variaveis locais nos metodos da classe ClientService
+
+[33mcommit 6b8235d44278c9a4c79786d3492fed67ebc48f33[m
+Author: evis <everton.soares@live.com>
+Date:   Sun Apr 5 05:01:24 2020 -0300
+
+    Inserido na classe ClientController metodo de verificação de id, metodo para validar se um objeto existe no array, metodo update e metodo delete. Na classe ClientService, refatoração dos metodos insertClient, removeClient, updateClient e clientDetails.
+
+[33mcommit ef4195d1b2bdf2bf1c440fbf672a77e5f33c3292[m
+Author: evis <everton.soares@live.com>
+Date:   Thu Apr 2 11:40:48 2020 -0300
+
+    gambiarra v1.1
+
+[33mcommit 7933f5b00bdc8a19178ab13c454b4537aca5fdc3[m
+Author: evis <everton.soares@live.com>
+Date:   Mon Mar 30 11:03:49 2020 -0300
+
+    Versão inicial
