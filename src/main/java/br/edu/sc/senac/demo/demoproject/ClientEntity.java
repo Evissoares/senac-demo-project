@@ -8,54 +8,56 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity(name = "Client")
-public class ClientEntity implements Serializable {
+final class ClientEntity implements Serializable {
 
-	private static final long serialVersionUID = -4299686595771526274L;
-
+	private static final long serialVersionUID = 8773632339802381906L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private String nome;
-	private String  dataNascimento;
+	private Long id;
+	
+	private String name;
+	
+	private String birthDate;
+	
 	private String email;
-	private String id;
 	
 	protected ClientEntity() {
 		
 	}
 	
-	public ClientEntity(String nome, String dataNascimento, String email, String id) {
-		this.nome = nome;
-		this.dataNascimento = dataNascimento;
+	public ClientEntity(String name, String birthDate, String email) {
+		this.name = name;
+		this.birthDate = birthDate;
 		this.email = email;
-		this.id = id;
 	}
 	
-	public String getClientId() {
+	public Long getClientId() {
 		return this.id;
 	}
 	
 	@Override
 	public String toString() {
-		return "ClientEntity [ClientId=" + this.id + ", name=" + this.nome + ", birthDate=" + this.dataNascimento + ", email=" + this.email + "]";
+		return "ClientEntity [ClientId=" + this.id + ", name=" + this.name + ", birthDate=" + this.birthDate + ", email=" + this.email + "]";
 	}
 
 	public String getName() {
-		return this.nome;
+		return this.name;
 	}
 
-	public void setName(final String nome) {
-		if (nome != null) {
-			this.nome = nome;
+	public void setName(final String name) {
+		if (name != null) {
+			this.name = name;
 		}
 	}
 
 	public String getBirthDate() {
-		return this.dataNascimento;
+		return this.birthDate;
 	}
 
 	public void setBirthDate(final String birthDate) {
 		if (birthDate != null) {
-			this.dataNascimento = birthDate;
+			this.birthDate = birthDate;
 		}
 	}
 
@@ -63,7 +65,7 @@ public class ClientEntity implements Serializable {
 		return this.email;
 	}
 
-	public void setPrice(final String email) {
+	public void setEmail(final String email) {
 		if (email != null) {
 			this.email = email;
 		}

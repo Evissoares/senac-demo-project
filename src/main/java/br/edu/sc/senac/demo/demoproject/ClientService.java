@@ -18,19 +18,25 @@ import org.springframework.web.bind.annotation.RestController;
 
 public class ClientService {
 
-	ClientController clientController;
-
-	private ClientService(ClientController clientController) {
+	private final ClientController clientController;
+	
+	ClientService(final ClientController clientController) {
 		this.clientController = clientController;
 	}
+	
+	
 
-	@PostMapping("/default")
-	public List<ClientDTO> addDefault() {
-		clientController.insertClient(new ClientDTO("Everton", "14/12/1993", "everton@senac.com"));
-		clientController.insertClient(new ClientDTO("João", "19/03/1972", "joao@senac.com"));
-		clientController.insertClient(new ClientDTO("Maria", "04/07/1985", "maria@senac.com"));
-		return clientController.getAllClients();
-	}
+//	private ClientService(ClientController clientController) {
+//		this.clientController = clientController;
+//	}
+
+//	@PostMapping("/default")
+//	public List<ClientDTO> addDefault() {
+//		clientController.insertClient(new ClientDTO("0", "Everton", "14/12/1993", "everton@senac.com"));
+//		clientController.insertClient(new ClientDTO("0", "João", "19/03/1972", "joao@senac.com"));
+//		clientController.insertClient(new ClientDTO("0", "Maria", "04/07/1985", "maria@senac.com"));
+//		return clientController.getAllClients();
+//	}
 
 	@GetMapping("/list")
 	public List<ClientDTO> list() {
@@ -39,13 +45,13 @@ public class ClientService {
 
 	// Refatorado 05/04/2020
 	@PostMapping("/addpayload")
-	public Long insertClient(@RequestBody ClientDTO client) {
+	public String insertClient(@RequestBody ClientDTO client) {
 		return clientController.insertClient(client);
 	}
 
 	// Refatorado 05/04/2020
 	@GetMapping("{id}/details")
-	public ResponseEntity<ClientDTO> clientDetails(@PathVariable String id) {
+	public ResponseEntity<ClientDTO> clientDetails(@PathVariable Long id) {
 		ClientDTO verifiedClient = clientController.getClient(id);
 		if (ClientDTO.NULL_VALUE.equals(verifiedClient)) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -55,7 +61,7 @@ public class ClientService {
 
 	// Refatorado 05/04/2020
 	@DeleteMapping("/{id}")
-	public ResponseEntity<ClientDTO> removeClient(@PathVariable String id) {
+	public ResponseEntity<ClientDTO> removeClient(@PathVariable Long id) {
 		ClientDTO verifiedClient = clientController.removeClient(id);
 		if (ClientDTO.NULL_VALUE.equals(verifiedClient)) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -65,14 +71,13 @@ public class ClientService {
 
 	// Refatorado 05/04/2020
 	@PutMapping("/{id}")
-	public ResponseEntity<ClientDTO> updateClient(@PathVariable String id, @RequestBody ClientDTO updateClient) {
+	public ResponseEntity<ClientDTO> updateClient(@PathVariable Long id, @RequestBody ClientDTO updateClient) {
 		ClientDTO verifiedClient = clientController.updateClient(id, updateClient);
 		if (ClientDTO.NULL_VALUE.equals(verifiedClient)) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<ClientDTO>(verifiedClient, HttpStatus.OK);
 	}
-
 }
 
 //	@RequestMapping("/add")

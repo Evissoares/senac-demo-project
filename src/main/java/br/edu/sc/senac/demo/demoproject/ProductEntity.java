@@ -15,7 +15,7 @@ final class ProductEntity implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long productId;
-
+	
 	private String name;
 
 	private String description;
