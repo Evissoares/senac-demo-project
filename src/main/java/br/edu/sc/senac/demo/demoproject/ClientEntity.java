@@ -13,7 +13,7 @@ final class ClientEntity implements Serializable {
 	private static final long serialVersionUID = 8773632339802381906L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	private String name;
