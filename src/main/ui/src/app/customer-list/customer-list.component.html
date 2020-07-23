@@ -1,0 +1,66 @@
+<!--
+<table id="costumer">
+    <thead>
+        <h2>Customers</h2>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Nome:</td>
+            <td>Everton</td>
+        </tr>
+        <tr>
+            <td>Data de Nascimento:</td>
+            <td>14/12/1993</td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td>everton.soares@senac.com</td>
+        </tr>
+    </tbody>
+   
+    
+    <div *ngFor="let nome of nomes">
+        <div>
+            {{nome}}
+        </div>
+    </div>    
+</table>
+
+<div *ngFor="let costumer of costumers">
+    <div class="container">
+        <div id="name"> Nome
+            <div>{{ costumer.nome }}</div>
+            <div id="born"> Data de Nascimento
+                <div>{{ costumer.dataNascimento }}</div>
+            </div>
+            <div id="email">
+                <div>{{ costumer.email }}</div>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+
+<!--dl *ngFor="let costumer of costumers">
+    <dt id="name">Nome</dt>
+    <dd>{{ costumer.nome }}</dd>
+    
+    <dt>Data de Nascimento</dt>
+    <dd>{{ costumer.dataNascimento }}</dd>
+    
+    <dt id="email">Email</dt>
+    <dd>{{ costumer.email }}</dd>
+</dl -->
+
+
+<div *ngFor="let customer of customers">
+    <h3>
+        <a [title]="customer.nome + ' details'"> {{ customer.nome }} </a>
+    </h3>
+
+    <p>
+        Email: {{ customer.email }}
+    </p>
+
+</div>
+

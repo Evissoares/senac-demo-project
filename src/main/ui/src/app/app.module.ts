@@ -10,6 +10,7 @@ import { TopBarComponent } from './top-bar/top-bar.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductsService } from './product-list/products.service';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { CustomerListComponent } from './customer-list/customer-list.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
     AppComponent,
     TopBarComponent,
     ProductListComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    CustomerListComponent
   ],
   bootstrap: [ AppComponent ],
   providers: [ProductsService]

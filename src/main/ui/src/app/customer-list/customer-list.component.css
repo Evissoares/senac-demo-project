@@ -1,0 +1,21 @@
+#costumer {
+    position: relative; 
+    margin-top: 2%;
+    margin-left: 1%;
+    width: 300px;
+
+}
+
+td {
+    display: inline-flex;
+    
+}
+
+#name, #email {
+    display: block;
+    margin-bottom: 1%;
+    font-size: 15pt;
+    color: dimgrey;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
