@@ -57,10 +57,12 @@
     <h3>
         <a [title]="customer.nome + ' details'"> {{ customer.nome }} </a>
     </h3>
-
-    <p>
+    <p *ngIf="customer.email">
         Email: {{ customer.email }}
     </p>
-
 </div>
+
+<!--div [style.display]="isSpecial ? 'block' : 'none'">Show with style</div>
+<div [style.display]="isSpecial ? 'none'  : 'block'">Hide with style</div-->
+
 

@@ -9,13 +9,15 @@ export class CustomerListComponent implements OnInit {
 
   //nomes = ["Aristoteles", "platão"];
 
+  private isSpecial = true;
+
   customers = [
     {
       nome: "Aristóteles",
       dataNascimento: "700 A.C.",
       email: "aristoteles@sc.senac.br"
     },
-  
+
     {
       nome: "Sócrates",
       dataNascimento: "800 A.C.",
@@ -26,7 +28,14 @@ export class CustomerListComponent implements OnInit {
       nome: "Platão",
       dataNascimento: "500 A.C.",
       email: "platao@sc.senac.br"
+    },
+
+    {
+      nome: "Tales De Mileto",
+      dataNascimento: "300 A.C.",
+      email: null
     }
+
 
   ];
 
