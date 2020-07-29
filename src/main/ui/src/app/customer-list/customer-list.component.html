@@ -53,9 +53,29 @@
 </dl -->
 
 
+
+<div>
+    <form #costumerForm="ngForm"
+        (ngSubmit)="onSubmit(costumerForm, costumerName.value, costumerBorn.value, costumerEmail.value)">
+        <label for="costumerName">Name</label>
+        <input #costumerName="ngModel" ngModel name="costumerName" required placeholder="Costumer name">
+
+        <label for="costumerBorn">Born Date</label>
+        <input #costumerBorn="ngModel" ngModel name="costumerBorn" required placeholder="xx/xx/xxxx">
+
+        <label for="costumerEmail">E-mail</label>
+        <input #costumerEmail="ngModel" ngModel name="costumerEmail" type="text" required placeholder="e-mail">
+
+        <button type="submit" [disabled]="!costumerForm.valid">Submit</button>
+    </form>
+    {{costumerName.value}}
+    {{costumerBorn.value}}
+    {{costumerEmail.value}}
+</div>
+
 <div *ngFor="let customer of customers">
     <h3>
-        <a [title]="customer.nome + ' details'"> {{ customer.nome }} </a>
+        <a [title]="customer.name + ' details'"> {{ customer.name }} </a>
     </h3>
     <p *ngIf="customer.email">
         Email: {{ customer.email }}
@@ -64,5 +84,4 @@
 
 <!--div [style.display]="isSpecial ? 'block' : 'none'">Show with style</div>
 <div [style.display]="isSpecial ? 'none'  : 'block'">Hide with style</div-->
-
 
