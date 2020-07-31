@@ -1,5 +1,5 @@
 <!--
-<table id="costumer">
+<table id="customer">
     <thead>
         <h2>Customers</h2>
     </thead>
@@ -26,56 +26,56 @@
     </div>    
 </table>
 
-<div *ngFor="let costumer of costumers">
+<div *ngFor="let customer of customers">
     <div class="container">
         <div id="name"> Nome
-            <div>{{ costumer.nome }}</div>
+            <div>{{ customer.nome }}</div>
             <div id="born"> Data de Nascimento
-                <div>{{ costumer.dataNascimento }}</div>
+                <div>{{ customer.dataNascimento }}</div>
             </div>
             <div id="email">
-                <div>{{ costumer.email }}</div>
+                <div>{{ customer.email }}</div>
             </div>
         </div>
     </div>
 </div>
 -->
 
-<!--dl *ngFor="let costumer of costumers">
+<!--dl *ngFor="let customer of customers">
     <dt id="name">Nome</dt>
-    <dd>{{ costumer.nome }}</dd>
+    <dd>{{ customer.nome }}</dd>
     
     <dt>Data de Nascimento</dt>
-    <dd>{{ costumer.dataNascimento }}</dd>
+    <dd>{{ customer.dataNascimento }}</dd>
     
     <dt id="email">Email</dt>
-    <dd>{{ costumer.email }}</dd>
+    <dd>{{ customer.email }}</dd>
 </dl -->
 
 
 
 <div>
-    <form #costumerForm="ngForm"
-        (ngSubmit)="onSubmit(costumerForm, costumerName.value, costumerBorn.value, costumerEmail.value)">
-        <label for="costumerName">Name</label>
-        <input #costumerName="ngModel" ngModel name="costumerName" required placeholder="Costumer name">
+    <form #customerForm="ngForm"
+        (ngSubmit)="onSubmit(customerForm)">
+        <label for="customerName">Name</label>
+        <input #customerName="ngModel" [(ngModel)] = "newCustomer.name" name="customerName" required placeholder="customer name">
 
-        <label for="costumerBorn">Born Date</label>
-        <input #costumerBorn="ngModel" ngModel name="costumerBorn" required placeholder="xx/xx/xxxx">
+        <label for="customerBorn">Born Date</label>
+        <input #customerBorn="ngModel" [(ngModel)] = "newCustomer.bornDate" name="customerBorn" pattern="[0-9]+$" minlength="8" maxlength="8" required placeholder="dd/mm/yyyy Numbers Only">
 
-        <label for="costumerEmail">E-mail</label>
-        <input #costumerEmail="ngModel" ngModel name="costumerEmail" type="text" required placeholder="e-mail">
+        <label for="customerEmail">E-mail</label>
+        <input #customerEmail="ngModel" [(ngModel)] ="newCustomer.email" name="customerEmail" type="text" pattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required placeholder="e-mail">
 
-        <button type="submit" [disabled]="!costumerForm.valid">Submit</button>
+        <button type="submit" [disabled]="!customerForm.valid">Submit</button>
     </form>
-    {{costumerName.value}}
-    {{costumerBorn.value}}
-    {{costumerEmail.value}}
+    {{customerName.value}}
+    {{customerBorn.value}}
+    {{customerEmail.value}}
 </div>
 
-<div *ngFor="let customer of customers">
+<div *ngFor="let customer of customerList">
     <h3>
-        <a [title]="customer.name + ' details'"> {{ customer.name }} </a>
+        <a title="{{ customer.name }} + details"> {{ customer.name }} </a>
     </h3>
     <p *ngIf="customer.email">
         Email: {{ customer.email }}

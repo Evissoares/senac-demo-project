@@ -10,14 +10,15 @@ export class CustomerListComponent implements OnInit {
 
   //nomes = ["Aristoteles", "platão"];
 
-  private customers: Customer[];
+  private customerList: Customer[];
+  private newCustomer = new Customer();
 
 
 
   constructor() { }
 
   ngOnInit() {
-    this.customers = [
+    this.customerList = [
       {
         name: "Aristóteles",
         bornDate: "700 A.C.",
@@ -42,14 +43,10 @@ export class CustomerListComponent implements OnInit {
     ];
   }
 
-  onSubmit(customerForm: NgForm, name: string, born: string, email: string ) {
+  onSubmit(customerForm: NgForm) {
 
     if(customerForm.valid) {
-      let newCustomer = new Customer();
-      newCustomer.name = name;
-      newCustomer.bornDate = born;
-      newCustomer.email = email;
-      this.customers.push(newCustomer);
+      this.customerList.push(this.newCustomer);
     }
   }
 
