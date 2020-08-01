@@ -11,6 +11,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductsService } from './product-list/products.service';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { CustomerListComponent } from './customer-list/customer-list.component';
+import { CustomerDetailsComponent } from './customer-details/customer-details.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { CustomerListComponent } from './customer-list/customer-list.component';
     RouterModule.forRoot([
       { path: '', component: ProductListComponent },
       { path: 'products/:productId', component: ProductDetailsComponent },
-      { path: 'customers', component: CustomerListComponent }
+      { path: 'customers', component: CustomerListComponent },
+      { path: 'customers/:customerId', component: CustomerDetailsComponent}
     ])
   ],
   declarations: [
@@ -29,7 +31,8 @@ import { CustomerListComponent } from './customer-list/customer-list.component';
     TopBarComponent,
     ProductListComponent,
     ProductDetailsComponent,
-    CustomerListComponent
+    CustomerListComponent,
+    CustomerDetailsComponent
   ],
   bootstrap: [ AppComponent ],
   providers: [ProductsService]

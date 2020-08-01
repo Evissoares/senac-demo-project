@@ -73,9 +73,11 @@
     {{customerEmail.value}}
 </div>
 
-<div *ngFor="let customer of customerList">
+<div *ngFor="let customer of customers; let id=index">
     <h3>
-        <a title="{{ customer.name }} + details"> {{ customer.name }} </a>
+        <a [title]="customer.name + ' details'" [routerLink] ="['/customers', id]"> 
+            {{ customer.name }} 
+        </a>
     </h3>
     <p *ngIf="customer.email">
         Email: {{ customer.email }}

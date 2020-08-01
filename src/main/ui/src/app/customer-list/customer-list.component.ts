@@ -10,43 +10,23 @@ export class CustomerListComponent implements OnInit {
 
   //nomes = ["Aristoteles", "platão"];
 
-  private customerList: Customer[];
-  private newCustomer = new Customer();
+  private customers: Customer[];
+  private newCustomer: Customer;
 
 
 
   constructor() { }
 
   ngOnInit() {
-    this.customerList = [
-      {
-        name: "Aristóteles",
-        bornDate: "700 A.C.",
-        email: "aristoteles@sc.senac.br"
-      },
-      {
-        name: "Socrates",
-        bornDate: "700 A.C.",
-        email: "aristoteles@sc.senac.br"
-      },
-      {
-        name: "Platão",
-        bornDate: "700 A.C.",
-        email: "aristoteles@sc.senac.br"
-      },
-
-      {
-        name: "Tales De Mileto",
-        bornDate: "300 A.C.",
-        email: null
-      }
-    ];
+    this.customers = customerCollection;
+    this.newCustomer = new Customer();
   }
 
   onSubmit(customerForm: NgForm) {
 
     if(customerForm.valid) {
-      this.customerList.push(this.newCustomer);
+      this.customers.push(this.newCustomer);
+      this.newCustomer = new Customer();
     }
   }
 
@@ -57,3 +37,27 @@ export class Customer {
   bornDate: string;
   email: string;
 }
+
+export const customerCollection = [
+  {
+    name: "Aristóteles",
+    bornDate: "700 A.C.",
+    email: "aristoteles@sc.senac.br"
+  },
+  {
+    name: "Socrates",
+    bornDate: "700 A.C.",
+    email: "aristoteles@sc.senac.br"
+  },
+  {
+    name: "Platão",
+    bornDate: "700 A.C.",
+    email: "aristoteles@sc.senac.br"
+  },
+
+  {
+    name: "Tales De Mileto",
+    bornDate: "300 A.C.",
+    email: null
+  }
+]
